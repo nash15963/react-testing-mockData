@@ -36,3 +36,11 @@
     transform: rotate(360deg);
   }
 }
+.movie{
+  width : 18% ;
+  height: 350px ;
+  margin: 5px;
+  object-fit: cover;
+  object-position: center top;
+  border : 1px solid black ;
+}
