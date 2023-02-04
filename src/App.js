@@ -65,7 +65,7 @@ function App() {
       {list.length >0?<MovieList list={list} setCount={setCount}/>:''}
       
       <h1>like list</h1>
-      
+
       <Container>
       {like.map((item)=> {
         return(
@@ -81,3 +81,5 @@ function App() {
 }
 
 export default App;
+
+// already install jest
