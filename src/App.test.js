@@ -1,8 +1,18 @@
 import { render, screen } from '@testing-library/react';
 import App from './App';
+import MovieList from './MovieList';
 
-test('renders learn react link', () => {
+describe('test App should working', () => {
+  test('element should exist', () => {
+    render(<MovieList/>)
+
+    expect(screen.getAllByRole('img')).toHaveLength(10) 
+    expect(screen.getAllByRole('button')).toHaveLength(10) 
+  })
+});
+
+
+test('renders fist time and it should run', () => {
   render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+  expect(screen.getByRole('heading', {name: "movie list"})).toBeInTheDocument();
 });

@@ -1,35 +1,18 @@
-import { useState , useEffect, useCallback } from 'react';
+import { useState , useEffect } from 'react';
 import './App.css';
-import styled from 'styled-components'
+import { Container ,buttonStyle , imgStyle} from './style.js'
+import MovieList from './MovieList';
 
-export const Container = styled.div`
-  width : 80% ;
-  min-width : 300px;
-  min-height : 300px;
-  display : flex;
-  border : 1px solid black;
-  margin: 20px auto ;
-  flex-wrap: wrap ;
-  justify-content: flex-start ;
-`
 
-export const imgStyle ={
-  width : '100%',
-  height : '90%',
-}
 
-export const buttonStyle ={
-  width : '90%' ,
-  margin : '5px auto'
-}
+
 
 function App() {
   const [list, setList] = useState([]);
   const [like, setLike] = useState([]);
   const [count, setCount] = useState(0);
-
   const url = "https://api.themoviedb.org/3/movie/top_rated?api_key=7dcd0053886fc8ec5f0fc4ee25fa55a1&language=zh-TW&page=1";
-  
+
   const handleFetchData = (url) => {
     fetch(url)
       .then((res) => res.json())
@@ -47,28 +30,16 @@ function App() {
       })
       .catch((err) => console.log(err));
   };
+
   const handleLikeData=()=>{
     const state = JSON.parse(localStorage.getItem('list')) ;
     // console.log(state)
-    if(state.length >0){
+    if(state){
       setLike([...state])
     }
   }
   
-  const handleMovieClick =(obj)=>{
-    const item = localStorage.getItem('list') ? true : false;
-    if(!item){
-      console.log(obj)
-      localStorage.setItem('list', JSON.stringify([obj]))
-      setCount((pre)=>pre+1)
-    }
-    else{
-      const data = JSON.parse(localStorage.getItem('list'))
-      data.push(obj)
-      localStorage.setItem('list',JSON.stringify(data))
-      setCount((pre)=>pre+1)
-    }
-  }
+
   const handleDelete = (id) => {
     setCount((pre)=>pre-1)
     const data = JSON.parse(localStorage.getItem('list'))
@@ -90,16 +61,11 @@ function App() {
   return (
     <div className="App">
       <h1>movie list</h1>
-      <Container>
-        {list.map((item) => {
-          return (
-            <div key={item.id} className='movie'>
-              <img src={item.posterUrl} alt={item.originalTitle} style={imgStyle}/>
-              <button type="vlaue" style={buttonStyle} onClick={()=>{handleMovieClick(item)}}>Get</button>
-            </div>
-        )})}
-      </Container>
+      
+      {list.length >0?<MovieList list={list} setCount={setCount}/>:''}
+      
       <h1>like list</h1>
+      
       <Container>
       {like.map((item)=> {
         return(
