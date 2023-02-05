@@ -4,22 +4,6 @@ import MovieList from './MovieList';
 
 
 
-// global.fetch = jest.fn(() =>
-//   Promise.resolve({
-//     json: () => Promise.resolve({
-//       id : 1,
-//       title : 'title',
-//       original_title : 'original_title',
-//       posterUrl: 'https://image.tmdb.org/t/p/w500/rnn30OlNPiC3IOoWHKoKARGsBRK.jpg'
-//     })
-//   })
-// );
-
-// beforeEach(() => {
-//   fetch.mockClear();
-// });
-
-
 describe('test App should working', () => {
   
   let originalFetch;
@@ -58,12 +42,9 @@ describe('test App should working', () => {
       original_title : 'original_title2',
       posterUrl: 'https://image.tmdb.org/t/p/w500/rnn30OlNPiC3IOoWHKoKARGsBRK.jpg'
     }]
-    // render(<MovieList list={mock}/>)
+    // eslint-disable-next-line testing-library/no-unnecessary-act
     await act(async() => render(<MovieList list={mock}/>))
     expect(screen.getAllByRole('img')).toHaveLength(2);
-    
-    // expect(fetch).toHaveBeenCalledTimes(1);
-    // expect(screen.getByText("title")).toBeInTheDocument();
   })
 });
 
