@@ -23,6 +23,7 @@ function App() {
             return {
               id: ele.id,
               title: ele.title ? ele.title : ele.original_title,
+              original_title : ele.original_title,
               posterUrl: `https://image.tmdb.org/t/p/w500${ele.poster_path}`,
             };
           })
